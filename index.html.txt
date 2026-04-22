@@ -1,0 +1,702 @@
+
+# Create index.html
+html_content = '''<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A/L Study Planner - Achieve Your Goals</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <i class="fas fa-graduation-cap"></i>
+                <span>A/L Planner</span>
+            </div>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="#home" class="nav-link active"><i class="fas fa-home"></i> Home</a></li>
+                <li><a href="#dashboard" class="nav-link"><i class="fas fa-chart-line"></i> Dashboard</a></li>
+                <li><a href="#subjects" class="nav-link"><i class="fas fa-book"></i> Subjects</a></li>
+                <li><a href="#timer" class="nav-link"><i class="fas fa-clock"></i> Timer</a></li>
+                <li><a href="#planner" class="nav-link"><i class="fas fa-tasks"></i> Planner</a></li>
+                <li><a href="#progress" class="nav-link"><i class="fas fa-chart-bar"></i> Progress</a></li>
+                <li><a href="#contact" class="nav-link"><i class="fas fa-envelope"></i> Contact</a></li>
+            </ul>
+            <div class="nav-controls">
+                <button class="theme-toggle" id="themeToggle" title="Toggle Dark/Light Mode">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <button class="music-toggle" id="musicToggle" title="Background Music">
+                    <i class="fas fa-music"></i>
+                </button>
+                <button class="mobile-menu-btn" id="mobileMenuBtn">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Home / Hero Section -->
+    <section id="home" class="hero-section">
+        <div class="hero-bg">
+            <div class="floating-shapes">
+                <div class="shape shape-1"></div>
+                <div class="shape shape-2"></div>
+                <div class="shape shape-3"></div>
+                <div class="shape shape-4"></div>
+            </div>
+        </div>
+        <div class="hero-content">
+            <div class="hero-badge">
+                <i class="fas fa-star"></i>
+                <span>Advanced Level Study Companion</span>
+            </div>
+            <h1 class="hero-title">
+                Manage Your Time,<br>
+                <span class="gradient-text">Achieve Your A/L Goals</span>
+            </h1>
+            <p class="hero-subtitle">
+                The ultimate study planner designed for Sri Lankan A/L students. 
+                Track your progress, stay focused, and ace your exams with smart tools.
+            </p>
+            <div class="hero-stats">
+                <div class="stat-item">
+                    <span class="stat-number" id="totalStudyHours">0</span>
+                    <span class="stat-label">Hours Studied</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number" id="tasksDone">0</span>
+                    <span class="stat-label">Tasks Completed</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number" id="streakCount">0</span>
+                    <span class="stat-label">Day Streak</span>
+                </div>
+            </div>
+            <div class="hero-buttons">
+                <a href="#timer" class="btn btn-primary">
+                    <i class="fas fa-play"></i> Start Studying
+                </a>
+                <a href="#dashboard" class="btn btn-secondary">
+                    <i class="fas fa-chart-pie"></i> View Dashboard
+                </a>
+            </div>
+            <div class="live-clock" id="liveClock">
+                <div class="clock-time" id="clockTime">--:--:--</div>
+                <div class="clock-date" id="clockDate">Loading...</div>
+            </div>
+        </div>
+        <div class="scroll-indicator">
+            <div class="mouse">
+                <div class="wheel"></div>
+            </div>
+            <span>Scroll to explore</span>
+        </div>
+    </section>
+
+    <!-- Dashboard Section -->
+    <section id="dashboard" class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">
+                    <i class="fas fa-chart-line"></i>
+                    Study Dashboard
+                </h2>
+                <p class="section-subtitle">Your daily study overview and performance metrics</p>
+            </div>
+            
+            <div class="greeting-card glass-card">
+                <div class="greeting-icon">
+                    <i class="fas fa-sun" id="greetingIcon"></i>
+                </div>
+                <div class="greeting-content">
+                    <h3 id="greetingText">Good Morning!</h3>
+                    <p id="greetingSubtext">Ready to conquer your A/L goals today?</p>
+                </div>
+                <div class="exam-countdown" id="examCountdown">
+                    <div class="countdown-item">
+                        <span class="countdown-number" id="daysLeft">--</span>
+                        <span class="countdown-label">Days</span>
+                    </div>
+                    <div class="countdown-item">
+                        <span class="countdown-number" id="hoursLeft">--</span>
+                        <span class="countdown-label">Hours</span>
+                    </div>
+                    <div class="countdown-item">
+                        <span class="countdown-number" id="minsLeft">--</span>
+                        <span class="countdown-label">Mins</span>
+                    </div>
+                    <div class="countdown-label-main">Until A/L Exam</div>
+                </div>
+            </div>
+
+            <div class="dashboard-grid">
+                <div class="dash-card glass-card">
+                    <div class="dash-icon" style="--color: #6366f1;">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <div class="dash-info">
+                        <h4>Hours Today</h4>
+                        <span class="dash-value" id="hoursToday">0.0</span>
+                        <span class="dash-unit">hours</span>
+                    </div>
+                    <div class="dash-progress">
+                        <div class="progress-ring">
+                            <svg viewBox="0 0 100 100">
+                                <circle class="progress-ring-bg" cx="50" cy="50" r="45"/>
+                                <circle class="progress-ring-fill" id="hoursRing" cx="50" cy="50" r="45"/>
+                            </svg>
+                            <div class="progress-text" id="hoursPercent">0%</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="dash-card glass-card">
+                    <div class="dash-icon" style="--color: #10b981;">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <div class="dash-info">
+                        <h4>Tasks Done</h4>
+                        <span class="dash-value" id="tasksCompleted">0</span>
+                        <span class="dash-unit">completed</span>
+                    </div>
+                    <div class="dash-progress">
+                        <div class="progress-ring">
+                            <svg viewBox="0 0 100 100">
+                                <circle class="progress-ring-bg" cx="50" cy="50" r="45"/>
+                                <circle class="progress-ring-fill" id="tasksRing" cx="50" cy="50" r="45"/>
+                            </svg>
+                            <div class="progress-text" id="tasksPercent">0%</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="dash-card glass-card">
+                    <div class="dash-icon" style="--color: #f59e0b;">
+                        <i class="fas fa-fire"></i>
+                    </div>
+                    <div class="dash-info">
+                        <h4>Current Streak</h4>
+                        <span class="dash-value" id="streakDisplay">0</span>
+                        <span class="dash-unit">days</span>
+                    </div>
+                    <div class="dash-progress">
+                        <div class="progress-ring">
+                            <svg viewBox="0 0 100 100">
+                                <circle class="progress-ring-bg" cx="50" cy="50" r="45"/>
+                                <circle class="progress-ring-fill" id="streakRing" cx="50" cy="50" r="45"/>
+                            </svg>
+                            <div class="progress-text" id="streakPercent">0%</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="dash-card glass-card">
+                    <div class="dash-icon" style="--color: #ec4899;">
+                        <i class="fas fa-calendar-alt"></i>
+                    </div>
+                    <div class="dash-info">
+                        <h4>Upcoming</h4>
+                        <span class="dash-value" id="upcomingExams">0</span>
+                        <span class="dash-unit">exams</span>
+                    </div>
+                    <div class="dash-progress">
+                        <div class="progress-ring">
+                            <svg viewBox="0 0 100 100">
+                                <circle class="progress-ring-bg" cx="50" cy="50" r="45"/>
+                                <circle class="progress-ring-fill" id="examsRing" cx="50" cy="50" r="45"/>
+                            </svg>
+                            <div class="progress-text" id="examsPercent">0%</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Subjects Section -->
+    <section id="subjects" class="section section-alt">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">
+                    <i class="fas fa-book-open"></i>
+                    Your Subjects
+                </h2>
+                <p class="section-subtitle">Track time spent on each A/L subject</p>
+            </div>
+
+            <div class="search-bar">
+                <i class="fas fa-search"></i>
+                <input type="text" id="subjectSearch" placeholder="Search subjects...">
+            </div>
+
+            <div class="subjects-grid" id="subjectsGrid">
+                <!-- Physics -->
+                <div class="subject-card glass-card" data-subject="physics">
+                    <div class="subject-header">
+                        <div class="subject-icon" style="--subject-color: #6366f1;">
+                            <i class="fas fa-atom"></i>
+                        </div>
+                        <div class="subject-info">
+                            <h3>Physics</h3>
+                            <span class="subject-stream">Physical Science</span>
+                        </div>
+                        <div class="subject-time">
+                            <span id="physicsTime">0</span>h
+                        </div>
+                    </div>
+                    <div class="subject-progress">
+                        <div class="progress-bar-bg">
+                            <div class="progress-bar-fill" id="physicsBar" style="width: 0%"></div>
+                        </div>
+                        <span class="progress-text" id="physicsPercent">0%</span>
+                    </div>
+                    <div class="subject-actions">
+                        <button class="btn-timer" onclick="startSubjectTimer('physics')">
+                            <i class="fas fa-play"></i> Study Now
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Chemistry -->
+                <div class="subject-card glass-card" data-subject="chemistry">
+                    <div class="subject-header">
+                        <div class="subject-icon" style="--subject-color: #10b981;">
+                            <i class="fas fa-flask"></i>
+                        </div>
+                        <div class="subject-info">
+                            <h3>Chemistry</h3>
+                            <span class="subject-stream">Physical Science</span>
+                        </div>
+                        <div class="subject-time">
+                            <span id="chemistryTime">0</span>h
+                        </div>
+                    </div>
+                    <div class="subject-progress">
+                        <div class="progress-bar-bg">
+                            <div class="progress-bar-fill" id="chemistryBar" style="width: 0%"></div>
+                        </div>
+                        <span class="progress-text" id="chemistryPercent">0%</span>
+                    </div>
+                    <div class="subject-actions">
+                        <button class="btn-timer" onclick="startSubjectTimer('chemistry')">
+                            <i class="fas fa-play"></i> Study Now
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Biology -->
+                <div class="subject-card glass-card" data-subject="biology">
+                    <div class="subject-header">
+                        <div class="subject-icon" style="--subject-color: #f59e0b;">
+                            <i class="fas fa-dna"></i>
+                        </div>
+                        <div class="subject-info">
+                            <h3>Biology</h3>
+                            <span class="subject-stream">Biological Science</span>
+                        </div>
+                        <div class="subject-time">
+                            <span id="biologyTime">0</span>h
+                        </div>
+                    </div>
+                    <div class="subject-progress">
+                        <div class="progress-bar-bg">
+                            <div class="progress-bar-fill" id="biologyBar" style="width: 0%"></div>
+                        </div>
+                        <span class="progress-text" id="biologyPercent">0%</span>
+                    </div>
+                    <div class="subject-actions">
+                        <button class="btn-timer" onclick="startSubjectTimer('biology')">
+                            <i class="fas fa-play"></i> Study Now
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Combined Maths -->
+                <div class="subject-card glass-card" data-subject="maths">
+                    <div class="subject-header">
+                        <div class="subject-icon" style="--subject-color: #ec4899;">
+                            <i class="fas fa-square-root-alt"></i>
+                        </div>
+                        <div class="subject-info">
+                            <h3>Combined Maths</h3>
+                            <span class="subject-stream">Physical Science</span>
+                        </div>
+                        <div class="subject-time">
+                            <span id="mathsTime">0</span>h
+                        </div>
+                    </div>
+                    <div class="subject-progress">
+                        <div class="progress-bar-bg">
+                            <div class="progress-bar-fill" id="mathsBar" style="width: 0%"></div>
+                        </div>
+                        <span class="progress-text" id="mathsPercent">0%</span>
+                    </div>
+                    <div class="subject-actions">
+                        <button class="btn-timer" onclick="startSubjectTimer('maths')">
+                            <i class="fas fa-play"></i> Study Now
+                        </button>
+                    </div>
+                </div>
+
+                <!-- ICT -->
+                <div class="subject-card glass-card" data-subject="ict">
+                    <div class="subject-header">
+                        <div class="subject-icon" style="--subject-color: #8b5cf6;">
+                            <i class="fas fa-laptop-code"></i>
+                        </div>
+                        <div class="subject-info">
+                            <h3>ICT</h3>
+                            <span class="subject-stream">Technology</span>
+                        </div>
+                        <div class="subject-time">
+                            <span id="ictTime">0</span>h
+                        </div>
+                    </div>
+                    <div class="subject-progress">
+                        <div class="progress-bar-bg">
+                            <div class="progress-bar-fill" id="ictBar" style="width: 0%"></div>
+                        </div>
+                        <span class="progress-text" id="ictPercent">0%</span>
+                    </div>
+                    <div class="subject-actions">
+                        <button class="btn-timer" onclick="startSubjectTimer('ict')">
+                            <i class="fas fa-play"></i> Study Now
+                        </button>
+                    </div>
+                </div>
+
+                <!-- General English -->
+                <div class="subject-card glass-card" data-subject="english">
+                    <div class="subject-header">
+                        <div class="subject-icon" style="--subject-color: #06b6d4;">
+                            <i class="fas fa-language"></i>
+                        </div>
+                        <div class="subject-info">
+                            <h3>General English</h3>
+                            <span class="subject-stream">Common</span>
+                        </div>
+                        <div class="subject-time">
+                            <span id="englishTime">0</span>h
+                        </div>
+                    </div>
+                    <div class="subject-progress">
+                        <div class="progress-bar-bg">
+                            <div class="progress-bar-fill" id="englishBar" style="width: 0%"></div>
+                        </div>
+                        <span class="progress-text" id="englishPercent">0%</span>
+                    </div>
+                    <div class="subject-actions">
+                        <button class="btn-timer" onclick="startSubjectTimer('english')">
+                            <i class="fas fa-play"></i> Study Now
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pomodoro Timer Section -->
+    <section id="timer" class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">
+                    <i class="fas fa-stopwatch"></i>
+                    Pomodoro Timer
+                </h2>
+                <p class="section-subtitle">Stay focused with the Pomodoro technique</p>
+            </div>
+
+            <div class="timer-container glass-card">
+                <div class="timer-modes">
+                    <button class="mode-btn active" data-mode="study" onclick="setTimerMode('study')">
+                        <i class="fas fa-book"></i> Study
+                    </button>
+                    <button class="mode-btn" data-mode="shortBreak" onclick="setTimerMode('shortBreak')">
+                        <i class="fas fa-coffee"></i> Short Break
+                    </button>
+                    <button class="mode-btn" data-mode="longBreak" onclick="setTimerMode('longBreak')">
+                        <i class="fas fa-couch"></i> Long Break
+                    </button>
+                </div>
+
+                <div class="timer-display">
+                    <div class="timer-circle">
+                        <svg viewBox="0 0 300 300">
+                            <circle class="timer-track" cx="150" cy="150" r="130"/>
+                            <circle class="timer-progress" id="timerProgress" cx="150" cy="150" r="130"/>
+                        </svg>
+                        <div class="timer-text">
+                            <div class="timer-time" id="timerDisplay">25:00</div>
+                            <div class="timer-label" id="timerLabel">Ready to Study</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timer-subject" id="timerSubject">
+                    <i class="fas fa-tag"></i>
+                    <span>General Study</span>
+                </div>
+
+                <div class="timer-controls">
+                    <button class="timer-btn btn-start" id="startBtn" onclick="startTimer()">
+                        <i class="fas fa-play"></i> Start
+                    </button>
+                    <button class="timer-btn btn-pause" id="pauseBtn" onclick="pauseTimer()" style="display:none;">
+                        <i class="fas fa-pause"></i> Pause
+                    </button>
+                    <button class="timer-btn btn-reset" id="resetBtn" onclick="resetTimer()">
+                        <i class="fas fa-redo"></i> Reset
+                    </button>
+                </div>
+
+                <div class="timer-stats">
+                    <div class="timer-stat">
+                        <i class="fas fa-check-circle"></i>
+                        <span id="sessionsCompleted">0 sessions</span>
+                    </div>
+                    <div class="timer-stat">
+                        <i class="fas fa-clock"></i>
+                        <span id="totalFocusTime">0 min focused</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Study Planner Section -->
+    <section id="planner" class="section section-alt">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">
+                    <i class="fas fa-calendar-check"></i>
+                    Study Planner
+                </h2>
+                <p class="section-subtitle">Organize your daily study tasks</p>
+            </div>
+
+            <div class="planner-container">
+                <div class="planner-input glass-card">
+                    <div class="input-group">
+                        <input type="text" id="taskInput" placeholder="What do you need to study today?" maxlength="100">
+                        <select id="taskSubject">
+                            <option value="general">General</option>
+                            <option value="physics">Physics</option>
+                            <option value="chemistry">Chemistry</option>
+                            <option value="biology">Biology</option>
+                            <option value="maths">Combined Maths</option>
+                            <option value="ict">ICT</option>
+                            <option value="english">General English</option>
+                        </select>
+                        <select id="taskPriority">
+                            <option value="normal">Normal</option>
+                            <option value="high">High Priority</option>
+                            <option value="low">Low Priority</option>
+                        </select>
+                        <button class="btn btn-primary" onclick="addTask()">
+                            <i class="fas fa-plus"></i> Add Task
+                        </button>
+                    </div>
+                </div>
+
+                <div class="planner-stats glass-card">
+                    <div class="planner-stat">
+                        <span class="stat-label">Total</span>
+                        <span class="stat-value" id="totalTasks">0</span>
+                    </div>
+                    <div class="planner-stat">
+                        <span class="stat-label">Pending</span>
+                        <span class="stat-value" id="pendingTasks">0</span>
+                    </div>
+                    <div class="planner-stat">
+                        <span class="stat-label">Completed</span>
+                        <span class="stat-value" id="completedTasks">0</span>
+                    </div>
+                    <div class="planner-stat">
+                        <span class="stat-label">Progress</span>
+                        <span class="stat-value" id="plannerProgress">0%</span>
+                    </div>
+                </div>
+
+                <div class="tasks-container" id="tasksContainer">
+                    <div class="empty-state" id="emptyState">
+                        <i class="fas fa-clipboard-list"></i>
+                        <h3>No tasks yet</h3>
+                        <p>Add your first study task above to get started!</p>
+                    </div>
+                    <ul class="tasks-list" id="tasksList"></ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Progress Section -->
+    <section id="progress" class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">
+                    <i class="fas fa-chart-area"></i>
+                    Progress Tracker
+                </h2>
+                <p class="section-subtitle">Visualize your weekly study performance</p>
+            </div>
+
+            <div class="progress-grid">
+                <div class="chart-card glass-card">
+                    <div class="chart-header">
+                        <h3><i class="fas fa-chart-bar"></i> Weekly Study Hours</h3>
+                        <div class="chart-legend">
+                            <span><i class="fas fa-circle" style="color:#6366f1;"></i> Study</span>
+                            <span><i class="fas fa-circle" style="color:#10b981;"></i> Target</span>
+                        </div>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="weeklyChart" width="600" height="300"></canvas>
+                    </div>
+                </div>
+
+                <div class="chart-card glass-card">
+                    <div class="chart-header">
+                        <h3><i class="fas fa-pie-chart"></i> Subject Distribution</h3>
+                    </div>
+                    <div class="chart-container pie-chart-container">
+                        <canvas id="subjectChart" width="400" height="300"></canvas>
+                        <div class="pie-legend" id="pieLegend"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="subject-breakdown glass-card">
+                <h3><i class="fas fa-list-alt"></i> Detailed Subject Breakdown</h3>
+                <div class="breakdown-grid" id="breakdownGrid">
+                    <!-- Generated by JS -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Motivation Section -->
+    <section class="motivation-section">
+        <div class="container">
+            <div class="motivation-card glass-card">
+                <div class="quote-icon">
+                    <i class="fas fa-quote-left"></i>
+                </div>
+                <blockquote id="motivationQuote">
+                    "Success is the sum of small efforts repeated daily."
+                </blockquote>
+                <cite id="quoteAuthor">— Robert Collier</cite>
+                <button class="btn-quote" onclick="newQuote()">
+                    <i class="fas fa-sync-alt"></i> New Quote
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section section-alt">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">
+                    <i class="fas fa-paper-plane"></i>
+                    Get in Touch
+                </h2>
+                <p class="section-subtitle">Have suggestions or need help? Contact us!</p>
+            </div>
+
+            <div class="contact-container">
+                <div class="contact-info glass-card">
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <div>
+                            <h4>Email</h4>
+                            <p>support@alplanner.lk</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <div>
+                            <h4>Phone</h4>
+                            <p>+94 76 123 4567</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <div>
+                            <h4>Location</h4>
+                            <p>Colombo, Sri Lanka</p>
+                        </div>
+                    </div>
+                    <div class="social-links">
+                        <a href="#" class="social-link"><i class="fab fa-facebook"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+
+                <form class="contact-form glass-card" onsubmit="handleContactSubmit(event)">
+                    <div class="form-group">
+                        <label><i class="fas fa-user"></i> Your Name</label>
+                        <input type="text" id="contactName" placeholder="Enter your name" required>
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-envelope"></i> Email Address</label>
+                        <input type="email" id="contactEmail" placeholder="Enter your email" required>
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-comment"></i> Message</label>
+                        <textarea id="contactMessage" rows="4" placeholder="How can we help you?" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-full">
+                        <i class="fas fa-paper-plane"></i> Send Message
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <i class="fas fa-graduation-cap"></i>
+                    <span>A/L Study Planner</span>
+                </div>
+                <p class="footer-text">Empowering Sri Lankan A/L students to achieve excellence through smart time management.</p>
+                <div class="footer-links">
+                    <a href="#home">Home</a>
+                    <a href="#dashboard">Dashboard</a>
+                    <a href="#timer">Timer</a>
+                    <a href="#planner">Planner</a>
+                    <a href="#progress">Progress</a>
+                </div>
+                <div class="footer-bottom">
+                    <p> 2026 A/L Study Planner. Made with <i class="fas fa-heart"></i> for students.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Toast Notifications -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <!-- Audio for timer -->
+    <audio id="timerSound" preload="auto">
+        <source src="data:audio/wav;base64,UklGRnoGAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQoGAACBhYqFbF1fdJivrJBhNjVgodDbq2EcBj+a2/LDciUFLIHO8tiJNwgZaLvt559NEAxQp+PwtmMcBjiR1/LMeSwFJHfH8N2QQAoUXrTp66hVFApGn+DyvmwhBTGH0fPTgjMGHm7A7+OZSA0PVanu87plHQUuh9Dz2YU2Bhxqv+zplkcODVGm5O+4ZSAEMYrO89GFNwYdcfDr4ZdJDQtPp+XysWUeBjiS1/LNfi0GI33R8tOENAcdcO/r4phJDQxPp+XyxGUhBjqT1/PQfS4GI3/R8tSFNwYdcfDr4plHDAtQp+TwxmUgBDeOzvPVhjYGHG3A7+SaSQ0LUqjl8b1mHwU2jc7z1YU1Bhxwv+zmm0gNC1Ko5fG+ZSAFNo/M89CEMwYccL/t5JtIDQtRqOXyxGUfBTiOzvPVhjUGG3C/7eWbSA0LUqjl8sZmIAU2js3z1YU1Bxtwv+zlmUgNC1Ko5fLEZSAFNo/M89CEMwYccL/t5ZpIDQtRqOXyxWUfBTiOzvPVhjUGG3C/7OWZSA0LUajl8sVlHwU3jM7z1YU1Bxtwv+zlmUgNC1Ko5fLFZSAF" type="audio/wav">
+    </audio>
+
+    <script src="script.js"></script>
+</body>
+</html>'''
+
+with open('/mnt/agents/output/index.html', 'w', encoding='utf-8') as f:
+    f.write(html_content)
+
+print("index.html created successfully!")
